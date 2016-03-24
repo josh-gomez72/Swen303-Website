@@ -26,6 +26,18 @@ router.get('/browse', function(req, res, next) {
 	)
 });
 
+router.get('/list', function (req, res, next){
+	client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +"db:list('Colenso')",
+	function (error, result) {
+		if (error){ console.error(error);}
+		else {
+		  var documentList = result.result.split('\n');
+		  res.render('list', { title: 'List of Database', place: documentList});
+		}
+	}		
+	)
+});
+
 router.get('/upload', function(req, res, next) {
   res.render('upload', { title: 'Upload/Edit Database' });
 });

@@ -1,0 +1,23 @@
+extends ../node_modules/jade-bootstrap/_bootstrap
+
+append styles
+  // Custom styles for this template
+  link(href='../css/starter-template.css', rel='stylesheet')
+
+  block body
+    +navbar-fixed("Colenso Project","navbar","inverse")
+      +nav_item("./") Home
+        +icon("home")
+      +nav_item("browse") Browse
+        +icon("th")
+      +nav_item("search") Search
+        +icon("search")
+      +nav_item("upload") Upload/Edit
+        +icon("upload")
+  .container
+    br
+    br
+    h1 Colenso Project
+    +list-group-links
+      each val in place
+        list-group-item(val, "")
