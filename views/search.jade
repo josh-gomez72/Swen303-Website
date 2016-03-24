@@ -6,7 +6,14 @@ append styles
 
   block body
     +navbar-fixed("Colenso Project","navbar","inverse")
-      +nav_item("index") Home
+      +nav_item("./") Home
       +nav_item("browse") Browse
       +nav_item("search") Search
-      +nav_item("upload") Upload/Edit 
+      +nav_item("upload") Upload/Edit
+  .container
+    br
+    br
+    h1 Colenso Project
+    form(action="/search", method="get")
+      +input("text", "txtName", "Search", "Search Query")
+      +submit("Submit")
