@@ -2,7 +2,7 @@ extends ../node_modules/jade-bootstrap/_bootstrap
 
 append styles
   // Custom styles for this template
-  link(href='../css/starter-template.css', rel='stylesheet')
+  link(href='stylesheets/style.css', rel='stylesheet')
 
   block body
     +navbar-fixed("Colenso Project","navbar","inverse")
@@ -18,6 +18,4 @@ append styles
     br
     br
     h1 Colenso Project
-    +list-group-links
-      each val in place
-        list-group-item(val, "")
+    p !{document}

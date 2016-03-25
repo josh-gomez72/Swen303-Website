@@ -15,26 +15,26 @@ router.get('/search', function(req, res, next) {
   res.render('search', { title: 'Search Database' });
 });
 
-router.get('/browse', function(req, res, next) {
-	client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" + "(//name[@type='place'])[1] ",
+router.get('/documentView', function(req, res, next) {
+	client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" + "(doc('Colenso/"+req.query.document+"'))[1] ",
 	function (error, result) {
 		if (error){ console.error(error);}
 		else {
-		  res.render('browse', { title: 'Browse Database', place: result.result});
+		  res.render('documentView', { title: "Document View", document: result.result});
 		}
-	}		
+	}
 	)
 });
 
-router.get('/list', function (req, res, next){
+router.get('/browse', function (req, res, next){
 	client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +"db:list('Colenso')",
 	function (error, result) {
 		if (error){ console.error(error);}
 		else {
 		  var documentList = result.result.split('\n');
-		  res.render('list', { title: 'List of Database', place: documentList});
+		  res.render('browse', { title: 'List of Database', place: documentList});
 		}
-	}		
+	}
 	)
 });
 

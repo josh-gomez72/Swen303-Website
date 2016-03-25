@@ -1,8 +1,16 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.style {
+  text-align: center;
+  padding: 40px 15px;
 }
 
-a {
-  color: #00B7FF;
+h4 {
+  text-decoration: underline;
+}
+
+body {
+  padding-top: 50px;
+}
+
+img {
+  margin: 10px;
 }
