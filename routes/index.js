@@ -16,7 +16,7 @@ router.get('/search', function(req, res, next) {
 });
 
 router.get('/documentView', function(req, res, next) {
-	client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" + "(doc('Colenso/"+req.query.document+"'))[1] ",
+	client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" + "(doc('Colenso/"+req.query.document+"'))",
 	function (error, result) {
 		if (error){ console.error(error);}
 		else {
@@ -41,6 +41,5 @@ router.get('/browse', function (req, res, next){
 router.get('/upload', function(req, res, next) {
   res.render('upload', { title: 'Upload/Edit Database' });
 });
-
 
 module.exports = router;
