@@ -18,8 +18,3 @@ append styles
     br
     br
     h1 Colenso Project
-    h4 List of Colenso Project Files
-    .container
-      each val in place
-        li: a(href = "/documentView?document=/"+val)
-          !{val}

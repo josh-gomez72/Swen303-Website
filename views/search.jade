@@ -5,12 +5,12 @@ append styles
   link(href='stylesheets/style.css', rel='stylesheet')
 
   block body
-    +navbar-fixed("Colenso Project","navbar","inverse")
+    +navbar-fixed("Colenso Project" ,"navbar")
       +nav_item("./") Home
         +icon("home")
       +nav_item("browse") Browse
         +icon("th")
-      +nav_item("search") Search
+      +nav_item("search", "active") Search
         +icon("search")
       +nav_item("upload") Upload/Edit
         +icon("upload")
@@ -18,6 +18,11 @@ append styles
     br
     br
     h1 Colenso Project
-    form(action="/search", method="get")
+    form(name = "searchForm", action="/searchResult", method="get")
       +input("text", "txtName", "Search", "Search Query")
+      input(type="radio", name="searchType", value="Text", checked=type=="Text")
+      | Text    
+      input(type="radio", name="searchType", value="XQuery", checked=type=="XQuery")
+      | XQuery
+      br
       +submit("Submit")
