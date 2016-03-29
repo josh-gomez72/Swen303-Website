@@ -5,7 +5,8 @@ append styles
   link(href='stylesheets/style.css', rel='stylesheet')
 
   block body
-    +navbar-fixed("Colenso Project","navbar")
+  +navbar-fixed()
+    a.navbar-brand(href='http://www.williamcolenso.co.nz/') Colenso Project
       +nav_item("./", "active") Home
         +icon("home")
       +nav_item("browse") Browse

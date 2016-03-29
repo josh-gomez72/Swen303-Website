@@ -5,7 +5,8 @@ append styles
   link(href='stylesheets/style.css', rel='stylesheet')
 
   block body
-    +navbar-fixed("Colenso Project" ,"navbar")
+    +navbar-fixed()
+      a.navbar-brand(href='http://www.williamcolenso.co.nz/') Colenso Project
       +nav_item("./") Home
         +icon("home")
       +nav_item("browse") Browse
@@ -18,9 +19,22 @@ append styles
     br
     br
     h1 Colenso Project
-    form(name = "stringSearch", action="/searchResult", method="get")
-      +input('text', 'stringValue', 'Search', 'Search String', 'stringValue')
-      +submit("Submit")
-    form(name = "querySearch", action="/searchResult", method="get")
-      +input('text', 'queryValue', 'Search', 'Search Query', 'queryValue')
-      +submit("Submit")
+    .container
+      form(name = "stringSearch", action="/searchResult", method="get")
+        +input('text', 'stringValue', 'Search', 'Search String', 'stringValue')
+        +submit("Submit")
+      form(name = "querySearch", action="/searchResult", method="get")
+        +input('text', 'queryValue', 'Search', 'Search Query', 'queryValue')
+        +submit("Submit")
+
+
+    //
+      +tab-list(["String", "Query"], 0)
+        +tab("String", "active")
+          form(name = "stringSearch", action="/searchResult", method="get")
+            +input('text', 'stringValue', 'Search', 'Search String', 'stringValue')
+            +submit("Submit")
+        +tab("XQuery")
+          form(name = "querySearch", action="/searchResult", method="get")
+            +input('text', 'queryValue', 'Search', 'Search Query', 'queryValue')
+            +submit("Submit")
