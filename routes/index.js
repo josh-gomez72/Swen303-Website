@@ -56,7 +56,7 @@ router.get('/searchResult', function(req, res, next){
       stringValue = stringValue.replace("AND", "\' ftand \'").replace("OR", "\' ftor \'").replace("NOT", "\' ftnot \'");
       console.log("String value block");
       console.log(stringValue);
-      client.execute(tei + "for $v in .//TEI[. contains text "+stringValue+"] return db:path($v)",
+      client.execute(tei + "for $v in .//TEI[. contains text "+stringValue+" using wildcards] return db:path($v)",
       function (error, result){
         if (error){
           console.log("ERRROR");
