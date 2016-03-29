@@ -53,6 +53,7 @@ router.get('/searchResult', function(req, res, next){
     var queryValue = req.query.queryValue;
     if (stringValue){
       stringValue = "'"+ (req.query.stringValue)+ "'";
+      stringValue = stringValue.replace("AND", "\' ftand \'").replace("OR", "\' ftor \'").replace("NOT", "\' ftnot \'");
       console.log("String value block");
       console.log(stringValue);
       client.execute(tei + "for $v in .//TEI[. contains text "+stringValue+"] return db:path($v)",
@@ -62,7 +63,6 @@ router.get('/searchResult', function(req, res, next){
           console.error(error);}
         else {
          var searchResult = result.result.split('\n');
-         console.log(searchResult);
          res.render('searchResult', {title: 'Search Results', place: searchResult, value: stringValue})
         }
       }
@@ -78,14 +78,13 @@ router.get('/searchResult', function(req, res, next){
         console.error(error);}
       else {
        var searchResult = result.result.split('\n');
-       console.log(searchResult);
        res.render('searchResult', {title: 'Search Results', place: searchResult, value: queryValue})
       }
     }
   )
 }
   else{
-    res.render('searchResult', {title: 'Search Results', place: [], value: stringValue})
+    res.render('search', {title: 'Search Database'})
   }
 });
 
