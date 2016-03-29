@@ -11,6 +11,11 @@ body {
   padding-top: 50px;
 }
 
+.container{
+  border-color: blue;
+  border-width: thick;
+}
+
 img {
   margin: 10px;
 }

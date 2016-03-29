@@ -8,7 +8,7 @@ append styles
     +navbar-fixed("Colenso Project","navbar")
       +nav_item("./") Home
         +icon("home")
-      +nav_item("browse", "active") Browse
+      +nav_item("browse") Browse
         +icon("th")
       +nav_item("search") Search
         +icon("search")
@@ -18,3 +18,8 @@ append styles
     br
     br
     h1 Colenso Project
+    .container
+      each val in place
+        li: a(href = "/documentView?document=/"+val)
+           !{val}
+           +a-btn("/download?document=/"+val) Download

@@ -23,3 +23,4 @@ append styles
       each val in place
         li: a(href = "/documentView?document=/"+val)
           !{val}
+          +a-btn("/download?document=/"+val) Download
