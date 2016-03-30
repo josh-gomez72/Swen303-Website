@@ -1,6 +1,11 @@
 var express = require('express');
 var router = express.Router();
+
 var multer = require('multer');
+var storage = multer.memoryStorage();
+var upload = multer({storage: storage});
+router.use(upload.single('file'));
+
 
 
 var basex = require('basex');
@@ -121,7 +126,39 @@ router.get('/download', function(req, res, next){
       }
     }
   )
+});
+/**Attempted Delete method
+router.get('/delete', function(req,res){
+  var filePath = req.query.document;
+  console.log("DELETE");
+  console.log(filePath);
+  client.execute('DELETE Colenso/'+filePath+'"'),
+  function(error,result){
+    if(error){
+      console.log(error);
+    }
+    else{
+      res.render('browse', {title: 'Browse Database'});
+    }
+  }
 })
+*/
+router.post("/upload", function(req,res){
+	if(req.file){
+		var xmlPath = req.file.buffer.toString();
+		var filePath = req.file.originalname;
+		client.execute('ADD TO Colenso/Uploads/'+filePath+' "'+xmlPath+'"',
+			function (error, result) {
+				if(error){
+					console.error(error);
+				} else {
+            console.log("Got into the right spot");
+            res.render('upload', { title: 'Upload/Edit Database' });
+				}
+			}
+		);
+	}
+});
 
 router.get('/upload', function(req, res, next) {
   res.render('upload', { title: 'Upload/Edit Database' });
