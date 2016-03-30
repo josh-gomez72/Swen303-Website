@@ -31,11 +31,6 @@ router.get('/documentView', function(req, res, next) {
 	)
 });
 
-router.get('/download', function(req, res, next){
-  console.log("Downloading " + req.query.document);
-  res.render('index', {title: 'Colenso Project'});
-});
-
 router.get('/browse', function (req, res, next){
 	client.execute(tei +"db:list('Colenso')",
 	function (error, result) {
@@ -87,6 +82,27 @@ router.get('/searchResult', function(req, res, next){
     res.render('search', {title: 'Search Database'})
   }
 });
+
+//tei + "(doc('Colenso/"+filePath+"'))",
+
+router.get('/download', function(req, res, next){
+  var path = req.query.document;
+  console.log(path);
+  console.log(tei + "(doc('Colenso"+path+"'))");
+  client.execute(tei + "(doc('Colenso"+path+"'))"),
+  function(error, result){
+    if (error){
+      console.log("ERROR");
+      console.log(error);
+    }
+    else {
+      console.log("found the document");
+      var file = result.result;
+      res.download("saved_files/",file);
+    }
+  }
+
+})
 
 router.get('/upload', function(req, res, next) {
   res.render('upload', { title: 'Upload/Edit Database' });
