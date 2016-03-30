@@ -130,7 +130,6 @@ router.get('/download', function(req, res, next){
 
 router.get('/delete', function(req,res){
   var filePath = req.query.document;
-  console.log("DELETE");
   var query = 'DELETE ' + filePath;
   console.log(query);
   client.execute(query,
