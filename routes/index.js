@@ -127,22 +127,23 @@ router.get('/download', function(req, res, next){
     }
   )
 });
-/**Attempted Delete method
+
 router.get('/delete', function(req,res){
   var filePath = req.query.document;
   console.log("DELETE");
-  console.log(filePath);
-  client.execute('DELETE Colenso/'+filePath+'"'),
+  var query = 'DELETE ' + filePath;
+  console.log(query);
+  client.execute(query,
   function(error,result){
     if(error){
       console.log(error);
     }
     else{
-      res.render('browse', {title: 'Browse Database'});
+      res.render('index', {title: 'Browse Database'});
     }
   }
+)
 })
-*/
 router.post("/upload", function(req,res){
 	if(req.file){
 		var xmlPath = req.file.buffer.toString();
