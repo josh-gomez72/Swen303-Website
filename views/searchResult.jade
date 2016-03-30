@@ -17,7 +17,7 @@ append styles
   .container
     br
     br
-    h2 Search Results containing !{value}
+    h2 Found !{place.length} result(s) containing !{value}
     .container
       each val in place
         li: a(href = "/documentView?document=/"+val)

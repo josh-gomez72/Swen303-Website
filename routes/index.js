@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var multer = require('multer');
+
 
 var basex = require('basex');
 var client = new basex.Session("127.0.0.1", 1984, "admin", "admin");
@@ -26,6 +28,20 @@ router.get('/documentView', function(req, res, next) {
 		if (error){ console.error(error);}
 		else {
 		  res.render('documentView', { title: "Document View", document: result.result, path: filePath});
+		}
+	}
+	)
+});
+
+router.get('/edit', function(req, res, next) {
+  console.log(req.query);
+  var filePath = req.query.document;
+  console.log(filePath);
+	client.execute(tei + "(doc('Colenso/"+filePath+"'))",
+	function (error, result) {
+		if (error){ console.error(error);}
+		else {
+		  res.render('edit', { title: "Edit Document", document: result.result, path: filePath});
 		}
 	}
 	)
@@ -83,25 +99,28 @@ router.get('/searchResult', function(req, res, next){
   }
 });
 
-//tei + "(doc('Colenso/"+filePath+"'))",
 
 router.get('/download', function(req, res, next){
   var path = req.query.document;
   console.log(path);
-  console.log(tei + "(doc('Colenso"+path+"'))");
-  client.execute(tei + "(doc('Colenso"+path+"'))"),
-  function(error, result){
-    if (error){
-      console.log("ERROR");
-      console.log(error);
+  var query = "XQUERY doc('Colenso"+path+"')";
+  console.log(query);
+  client.execute(query,
+    function(error, result){
+      if (error){
+        console.log("ERROR");
+        console.log(error);
+      }
+      else {
+        console.log("found the document");
+        var file = result.result;
+        var fileName = path;
+        res.writeHead(200, {'Content-Disposition': 'attachment; filename=' + fileName,});
+        res.write(file);
+        res.end();
+      }
     }
-    else {
-      console.log("found the document");
-      var file = result.result;
-      res.download("saved_files/",file);
-    }
-  }
-
+  )
 })
 
 router.get('/upload', function(req, res, next) {

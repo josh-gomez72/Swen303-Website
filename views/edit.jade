@@ -15,7 +15,7 @@ append styles
       +nav_item("upload") Upload
         +icon("upload")
   .container
-    h2 !{path}
-    p !{document}
-    +a-btn("/edit?document="+path) Edit File
-    +a-btn("/download?document="+path) Download File
+    h2 Editing !{path}
+    textArea(rows='25', cols='130') #{document}
+    br
+    +a-btn("#") Submit Changes
